@@ -1,24 +1,20 @@
 name: Merge Action
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-      - devs
+
+  pull_request:
+    branchs:
+      - main
 
 jobs:
-  merge_from_main:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+  log_context:
     runs-on: ubuntu-latest
     steps:
-      - name: Main branch merge action
+      - name: Log context
         run: |
-          echo "Merged from main branch!"
-
-  merge_from_feature:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'feature'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Feature branch merge action
-        run: |
-          echo "Merged from feature branch!"
+          echo Ref ${{ github.ref }}
+          echo Base ref ${{ github.base_ref }}
+          echo Head ref ${{ github.head_ref }}
