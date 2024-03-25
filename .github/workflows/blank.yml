@@ -1,13 +1,12 @@
 name: Merge Action
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #  branches:
+  #    - main
 
   pull_request:
-    branchs:
-      - main
+    types: [closed]
 
 jobs:
   log_context:
@@ -18,3 +17,35 @@ jobs:
           echo Ref ${{ github.ref }}
           echo Base ref ${{ github.base_ref }}
           echo Head ref ${{ github.head_ref }}
+          echo Event ${{ github.event }}
+          echo Event Pull Request ${{ github.event.pull_request }}
+          echo Event Pull Request Base ${{ github.event.pull_request.base }}
+          echo Event Pull Request Base Ref ${{ github.event.pull_request.base.ref }}
+          echo Event Pull Request Head Ref ${{ github.event.pull_request.head.ref }}
+
+  only_merged:
+    # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'devs'
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only Merged!
+        run: |
+          echo "Only Merged!"
+
+  from_devs_to_main:
+    # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'devs'
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'devs'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merged from devs branch to main!
+        run: |
+          echo "Merged from devs branch to main!"
+
+  from_feature_to_main:
+    # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.base.ref == 'feature'
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'feature'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merged from feature branch to main!
+        run: |
+          echo "Merged from feature branch to main!"
