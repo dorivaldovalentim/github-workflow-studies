@@ -5,10 +5,16 @@ on:
     branches:
       - main
 
+  pull_request:
+    branchs:
+      - main
+
 jobs:
   log_context:
     runs-on: ubuntu-latest
     steps:
       - name: Log context
         run: |
-          echo ${{ github }}
+          echo Ref ${{ github.ref }}
+          echo Base ref ${{ github.base_ref }}
+          echo Head ref ${{ github.head_ref }}
