@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+  pull_request:
+    branchs:
+      - main
+
 jobs:
   log_context:
     runs-on: ubuntu-latest
