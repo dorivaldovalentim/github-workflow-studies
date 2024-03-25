@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Log context
         run: |
-          echo github
+          echo ${{ github }}
