@@ -43,7 +43,7 @@ jobs:
 
   from_feature_to_main:
     # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.base.ref == 'feature'
-    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.base.ref == 'feature'
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'feature'
     runs-on: ubuntu-latest
     steps:
       - name: Merged from feature branch to main!
