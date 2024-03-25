@@ -1,12 +1,22 @@
 name: Merge Action
 
 on:
+  push:
+    branches:
+      - main
+    
   pull_request:
     branches:
       - main
-      - devs
 
 jobs:
+  log_context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log context
+        run: |
+          echo github
+  
   merge_from_main:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
