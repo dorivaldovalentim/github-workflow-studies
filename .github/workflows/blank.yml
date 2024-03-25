@@ -11,6 +11,6 @@ jobs:
     steps:
       - name: Log context
         run: |
-          echo ${{ github.ref }}
-          echo ${{ github.base_ref }}
-          echo ${{ github.head_ref }}
+          echo Ref ${{ github.ref }}
+          echo Base ref ${{ github.base_ref }}
+          echo Head ref ${{ github.head_ref }}
