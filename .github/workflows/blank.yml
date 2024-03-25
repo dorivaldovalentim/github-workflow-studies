@@ -2,23 +2,23 @@ name: Merge Action
 
 on:
   pull_request:
-    branches:
-      - main
-      - devs
+    types: [closed]
 
 jobs:
-  merge_from_main:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+  # This job runs whenever a pull request is merged
+  merged_to_main:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     steps:
-      - name: Main branch merge action
+      - name: Print message for merge to main
         run: |
-          echo "Merged from main branch!"
+          echo "Merged from feature or dev branch to main!"
 
-  merge_from_feature:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'feature'
+  # This job specifically runs for merges from feature branches
+  merged_from_feature:
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref =~ ^refs/heads/feature/
     runs-on: ubuntu-latest
     steps:
-      - name: Feature branch merge action
+      - name: Print message for feature branch merge
         run: |
-          echo "Merged from feature branch!"
+          echo "Merged from feature branch to main!"
