@@ -21,6 +21,7 @@ jobs:
           echo Event Pull Request ${{ github.event.pull_request }}
           echo Event Pull Request Base ${{ github.event.pull_request.base }}
           echo Event Pull Request Base Ref ${{ github.event.pull_request.base.ref }}
+          echo Event Pull Request Base Ref ${{ github.event.pull_request.head.ref }}
 
   from_devs_to_main:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'devs'
