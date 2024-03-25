@@ -16,7 +16,7 @@ jobs:
 
   # This job specifically runs for merges from feature branches
   merged_from_feature:
-    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref =~ ^refs/heads/feature/
+    if: github.event.pull_request.merged == true && github.event.pull_request.head.ref = 'feature'
     runs-on: ubuntu-latest
     steps:
       - name: Print message for feature branch merge
